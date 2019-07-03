@@ -41,9 +41,9 @@ void SimpleIPVideoServer::setup(const Settings& settings)
 }
 
 
-void SimpleIPVideoServer::send(const ofPixels& pix)
+void SimpleIPVideoServer::send(const ofPixels& pix, int quality)
 {
-    _ipVideoRoute.send(pix);
+    _ipVideoRoute.send(pix, quality);
 }
 
 

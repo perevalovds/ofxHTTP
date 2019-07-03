@@ -11,6 +11,8 @@
 #include "Poco/DateTimeFormatter.h"
 #include "ofImage.h"
 
+#include "ofxTurboJpeg.h"
+
 
 #undef min // for windows
 #undef max // for windows
@@ -253,7 +255,9 @@ Poco::Net::HTTPRequestHandler* IPVideoRoute::createRequestHandler(const Poco::Ne
 }
 
 
-void IPVideoRoute::send(const ofPixels& pix) const
+ofxTurboJpeg __turbo__; //DENIS PEREVALOV NOTE: only one object, probably can't do in many threads
+
+void IPVideoRoute::send(const ofPixels& pix, int quality) const
 {
     if (pix.isAllocated())
     {
@@ -284,13 +288,22 @@ void IPVideoRoute::send(const ofPixels& pix) const
                               frameSettings.getFlipHorizontal());
             }
 
-            ofSaveImage(pixels, compressedPixels, OF_IMAGE_FORMAT_JPEG, frameSettings.getQuality());
+			//DENIS   TODO Redefine quality!!
+            //ofSaveImage(pixels, compressedPixels, OF_IMAGE_FORMAT_JPEG, frameSettings.getQuality());
+			//float time0 = ofGetElapsedTimef();
+			__turbo__.save(compressedPixels, pixels, quality); //frameSettings.getQuality());
+			//cout << "compress time " << ofGetElapsedTimef() - time0 << endl;
         }
         else
         {
-            ofPixels pixels = pix;
-            ofSaveImage(pixels, compressedPixels, OF_IMAGE_FORMAT_JPEG, frameSettings.getQuality());
-        }
+			//DENIS   TODO Redefine quality!!
+			//ofPixels pixels = pix;
+			//float time0 = ofGetElapsedTimef();
+			//ofSaveImage(pixels, compressedPixels, OF_IMAGE_FORMAT_JPEG, frameSettings.getQuality());
+			int QUALITY = 70;
+			__turbo__.save(compressedPixels, pix, quality);
+			//cout << "compress time " << ofGetElapsedTimef() - time0 << endl;
+		}
 
         std::unique_lock<std::mutex> lock(_mutex);
 

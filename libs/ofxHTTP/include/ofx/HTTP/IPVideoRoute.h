@@ -164,7 +164,8 @@ public:
 
     Poco::Net::HTTPRequestHandler* createRequestHandler(const Poco::Net::HTTPServerRequest& request) override;
 
-    void send(const ofPixels& pix) const;
+	//send for MJPEG stream, quality = 0..100 - for TurboJPEG 
+    void send(const ofPixels& pix, int quality = 80) const;
 
     std::size_t numConnections() const;
 

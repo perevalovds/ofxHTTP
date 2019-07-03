@@ -50,8 +50,9 @@ public:
     virtual void setup(const Settings& settings) override;
 
     /// \brief Submit the pixels to send.
-    /// \param pixels The pixels to send.
-    void send(const ofPixels& pixels);
+	/// \param pixels The pixels to send.
+	/// \param quality Quality for TurboJPEG, 0..100.
+    void send(const ofPixels& pixels, int quality = 80);
 
     /// \returns the number of clicents that are currently connected.
     std::size_t numConnections() const;
