@@ -3,6 +3,7 @@
 ## Description
 
 An [openFrameworks](http://openframeworks.cc) addon for custom HTTP clients and servers.
+It's modified version by Denis Perevalov to support ofxTurboJpeg for faster streaming MMJPEG.
 
 ## Features
 
