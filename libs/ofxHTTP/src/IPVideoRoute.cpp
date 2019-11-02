@@ -300,7 +300,6 @@ void IPVideoRoute::send(const ofPixels& pix, int quality) const
 			//ofPixels pixels = pix;
 			//float time0 = ofGetElapsedTimef();
 			//ofSaveImage(pixels, compressedPixels, OF_IMAGE_FORMAT_JPEG, frameSettings.getQuality());
-			int QUALITY = 70;
 			__turbo__.save(compressedPixels, pix, quality);
 			//cout << "compress time " << ofGetElapsedTimef() - time0 << endl;
 		}

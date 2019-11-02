@@ -12,7 +12,7 @@ void ofApp::setup()
 {
     // Testing redirects and https.
     // This server will echo back everything that you send to it.
-    std::string url = "https://httpbin.org/get";
+    std::string url = "https://httpbin.org/get?test=value";
 
     // Create a client.
     ofxHTTP::Client client;
