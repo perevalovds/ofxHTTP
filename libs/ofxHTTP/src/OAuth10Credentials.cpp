@@ -92,7 +92,8 @@ OAuth10Credentials OAuth10Credentials::fromJSON(const ofJson& json)
     while (iter != json.cend())
     {
         const auto& key = iter.key();
-        const auto& value = iter.value();
+        const auto& jsonvalue = iter.value();
+        std::string value = jsonvalue.get<std::string>();
 
         if (key == "consumerKey") credentials._consumerKey = value;
         else if (key == "consumerSecret" || key == "consumer_secret") credentials._consumerSecret = value;
@@ -100,7 +101,7 @@ OAuth10Credentials OAuth10Credentials::fromJSON(const ofJson& json)
         else if (key == "accessTokenSecret" || key == "access_token_secret") credentials._accessTokenSecret = value;
         else if (key == "owner") credentials._owner = value;
         else if (key == "ownerId" || key == "owner_id" ) credentials._ownerId = value;
-        else ofLogWarning("Credentials::fromJSON") << "Unknown key: " << key << std::endl << value.dump(4);
+        else ofLogWarning("Credentials::fromJSON") << "Unknown key: " << key << std::endl << jsonvalue.dump(4);
         ++iter;
     }
 
